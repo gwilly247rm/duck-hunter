@@ -66,6 +66,9 @@
 			<Add library="libadvapi32.a" />
 			<Add directory="../../../../../allegro/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/lib" />
 		</Linker>
+		<Unit filename="AttackJudgeBullet.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="function.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
