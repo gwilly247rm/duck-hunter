@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 
-void AttackJudgeBullet(ALLEGRO*event,object*dog,int *dog_killed)
+void AttackJudgeBullet(ALLEGRO_EVENT *event,object*dog,int *dog_killed)
 {
     //int count_dog_relife=0;
     int x=0,y=0;
