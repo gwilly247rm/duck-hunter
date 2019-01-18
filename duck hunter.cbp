@@ -69,6 +69,15 @@
 		<Unit filename="AttackJudgeBullet.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="AttackJudgeShit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MoveDog.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MoveDuck.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="function.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />

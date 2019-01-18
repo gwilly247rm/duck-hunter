@@ -32,6 +32,7 @@ int main()
     ALLEGRO_EVENT_QUEUE* event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_EVENT *events = NULL;
+
     /***/
     ALLEGRO_BITMAP* windows = NULL;
     ALLEGRO_BITMAP* B_start = NULL;
@@ -52,7 +53,9 @@ int main()
     al_init_font_addon();
     al_init_ttf_addon();
 
-    timer = al_create_timer(0. 01 );
+    ALLEGRO_MOUSE_STATE *MSstate=NULL;
+
+    timer = al_create_timer(0.01);
     display = al_create_display(display_wid, display_len);
     srand( time( NULL ) );
 
@@ -74,14 +77,14 @@ int main()
     int y=0;
     int xr=1000,yr=1000;
     /********************************/
-    windows = al_load_bitmap("./Window2.png");
-    B_start = al_load_bitmap("./B_start.png");
-    B_ranking = al_load_bitmap("./B_ranking.png");
-    B_explain = al_load_bitmap("./B_explain.png");
-    B_exit = al_load_bitmap("./B_exit.png");
-    P_ranking = al_load_bitmap("./P_ranking.png");
-    B_back = al_load_bitmap("./B_back.png");
-    P_explain = al_load_bitmap("./P_explain.png");
+    windows = al_load_bitmap("Window2.png");
+    B_start = al_load_bitmap("B_Start.png");
+    B_ranking = al_load_bitmap("B_ranking.png");
+    B_explain = al_load_bitmap("B_explain.png");
+    B_exit = al_load_bitmap("B_exit.png");
+    P_ranking = al_load_bitmap("P_ranking.png");
+    B_back = al_load_bitmap("B_back.png");
+    P_explain = al_load_bitmap("P_explain.png");
 
 
     object duck;
@@ -97,7 +100,7 @@ int main()
     duck.change_dir=0;
     duck.hp=3;
 
-    if(i=0;i<=dog_amount-1;i++){
+    for(i=0;i<=dog_amount-1;i++){
         DOG[i].bmp=al_load_bitmap("dog.png");
         DOG[i].kind=0;
         DOG[i].x=0;
@@ -108,7 +111,7 @@ int main()
         DOG[i].hp=0;
     }
 
-    if(i=0;i<=shit_amount-1;i++){
+    for(i=0;i<=shit_amount-1;i++){
         SHIT[i].bmp=al_load_bitmap("shit.png");
         SHIT[i].kind=0;
         SHIT[i].x=0;
@@ -130,6 +133,7 @@ int main()
         xr=1000,yr=1000;
 
 
+
         al_draw_bitmap(windows, 0, 0, 0);
         al_draw_bitmap(B_start, 430, 360, 0);
         al_draw_bitmap( B_ranking, 430, 440, 0);
@@ -137,22 +141,22 @@ int main()
         al_draw_bitmap(B_exit, 430, 600, 0);
 
         al_flip_display();
-        al_get_mouse_state(&MSstate);
-            if(al_mouse_button_down(&MSstate,1)==1)
+        al_get_mouse_state(MSstate);printf("k");
+            if(al_mouse_button_down(MSstate,1))
             {
-                x=al_get_mouse_state_axis(&MSstate,0);
-                y=al_get_mouse_state_axis(&MSstate,1);
+                x=al_get_mouse_state_axis(MSstate,0);
+                y=al_get_mouse_state_axis(MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(&MSstate);
-                al_rest(0.01);
-                if(al_mouse_button_down(&MSstate,1)==0)
+                al_get_mouse_state(MSstate);
+
+                if(al_mouse_button_down(MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(&MSstate,0);
-                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    xr=al_get_mouse_state_axis(MSstate,0);
+                    yr=al_get_mouse_state_axis(MSstate,1);
                     break;
                 }
 
@@ -209,18 +213,18 @@ int main()
                 MoveDog(DOG, &display_wid, &display_len);
 
                 while (al_get_next_event(event_queue, events)) {
-                    switch (*events.type) {
+                    switch ((*events).type) {
                     case ALLEGRO_EVENT_DISPLAY_CLOSE:
                         run = 0;
                         break;
 
                     case ALLEGRO_EVENT_KEY_DOWN:
-                        if(*events.keyboard.keycode == ALLEGRO_KEY_ESCAPE){run = 0;}
+                        if((*events).keyboard.keycode == ALLEGRO_KEY_ESCAPE){run = 0;}
                         MoveDuck(events, &duck, &display_wid);
                         break;
 
                     case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                        if(*events.mouse.buttom==1){
+                        if((*events).mouse.button==1){
                             AttackJudgeBullet(events, DOG, &dog_killed);
                         }
                         break;
@@ -240,7 +244,7 @@ int main()
                     al_draw_bitmap(SHIT[i].bmp, SHIT[i].x, SHIT[i].y, 0);
                 }
             }
-            al_flip_display(display);
+            al_flip_display();
 
             if(duck.hp<=0){
                 mode=3;
@@ -253,22 +257,22 @@ int main()
 /********************************************************************************************************************************/
         while(mode==4){//顯示排行榜
 
-            al_get_mouse_state(&MSstate);
-            if(al_mouse_button_down(&MSstate,1)==1)
+            al_get_mouse_state(MSstate);
+            if(al_mouse_button_down(MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(&MSstate,0);
-                y=al_get_mouse_state_axis(&MSstate,1);
+                x=al_get_mouse_state_axis(MSstate,0);
+                y=al_get_mouse_state_axis(MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(&MSstate);
+                al_get_mouse_state(MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(&MSstate,1)==0)
+                if(al_mouse_button_down(MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(&MSstate,0);
-                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    xr=al_get_mouse_state_axis(MSstate,0);
+                    yr=al_get_mouse_state_axis(MSstate,1);
                     break;
                 }
 
@@ -283,22 +287,22 @@ int main()
 
         while(mode==5){//操作說明
 
-            al_get_mouse_state(&MSstate);
-            if(al_mouse_button_down(&MSstate,1)==1)
+            al_get_mouse_state(MSstate);
+            if(al_mouse_button_down(MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(&MSstate,0);
-                y=al_get_mouse_state_axis(&MSstate,1);
+                x=al_get_mouse_state_axis(MSstate,0);
+                y=al_get_mouse_state_axis(MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(&MSstate);
+                al_get_mouse_state(MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(&MSstate,1)==0)
+                if(al_mouse_button_down(MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(&MSstate,0);
-                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    xr=al_get_mouse_state_axis(MSstate,0);
+                    yr=al_get_mouse_state_axis(MSstate,1);
                     break;
                 }
 
@@ -325,8 +329,8 @@ int main()
     al_destroy_bitmap(DOG[i].bmp);}
     for(i=0;i<=shit_amount-1;i++){
     al_destroy_bitmap(SHIT[i].bmp);}
-    al_destroy_font( pongfont );
+    al_destroy_font( font );
     al_destroy_timer(timer);
     al_destroy_event_queue(event_queue);
     return 0;
-}
+}}
