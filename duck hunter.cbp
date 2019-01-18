@@ -30,10 +30,47 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="../../../../../allegro/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-static" />
+			<Add option="-static-libgcc" />
+			<Add option="-static-libstdc++" />
+			<Add library="liballegro_monolith-static.a" />
+			<Add library="libvorbisfile.a" />
+			<Add library="libvorbis.a" />
+			<Add library="libphysfs.a" />
+			<Add library="libdumb.a" />
+			<Add library="libFLAC.a" />
+			<Add library="libfreetype.a" />
+			<Add library="libjpeg.a" />
+			<Add library="libogg.a" />
+			<Add library="libpng16.a" />
+			<Add library="libtheoradec.a" />
+			<Add library="libzlib.a" />
+			<Add library="libpsapi.a" />
+			<Add library="libwinmm.a" />
+			<Add library="libshlwapi.a" />
+			<Add library="libgdi32.a" />
+			<Add library="libopengl32.a" />
+			<Add library="libole32.a" />
+			<Add library="libdsound.a" />
+			<Add library="libpthread.a" />
+			<Add library="libkernel32.a" />
+			<Add library="libuser32.a" />
+			<Add library="libwinspool.a" />
+			<Add library="libshell32.a" />
+			<Add library="liboleaut32.a" />
+			<Add library="libuuid.a" />
+			<Add library="libcomdlg32.a" />
+			<Add library="libadvapi32.a" />
+			<Add directory="../../../../../allegro/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/lib" />
+		</Linker>
+		<Unit filename="function.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="struct.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
