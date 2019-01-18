@@ -27,6 +27,16 @@ int main()
     int shit_wid=40;//屎寬
     int shit_len=40;//長
 
+    al_init();
+    al_install_keyboard();
+    al_init_image_addon();
+    al_install_audio();
+    al_init_acodec_addon();
+    al_reserve_samples(9);
+    al_init_font_addon();
+    al_init_ttf_addon();
+
+
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_FONT *font = NULL;
     ALLEGRO_EVENT_QUEUE* event_queue = NULL;
@@ -43,21 +53,14 @@ int main()
     ALLEGRO_BITMAP* P_explain = NULL;
     ALLEGRO_BITMAP* P_ranking = NULL;
 
-    al_init();
-    al_install_keyboard();
-    al_install_mouse();
-    al_init_image_addon();
-    al_install_audio();
-    al_init_acodec_addon();
-    al_reserve_samples(9);
-    al_init_font_addon();
-    al_init_ttf_addon();
 
-    ALLEGRO_MOUSE_STATE *MSstate=NULL;
+
 
     timer = al_create_timer(0.01);
     display = al_create_display(display_wid, display_len);
     srand( time( NULL ) );
+    al_install_mouse();
+    ALLEGRO_MOUSE_STATE MSstate;
 
     event_queue = al_create_event_queue();
     al_register_event_source(event_queue, al_get_keyboard_event_source());    /* register keyboard to event queue */
@@ -141,22 +144,24 @@ int main()
         al_draw_bitmap(B_exit, 430, 600, 0);
 
         al_flip_display();
-        al_get_mouse_state(MSstate);printf("k");
-            if(al_mouse_button_down(MSstate,1))
+        printf("f");
+        al_get_mouse_state(&MSstate);
+        printf("k");
+            if(al_mouse_button_down(&MSstate,1))
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
 
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
@@ -257,22 +262,22 @@ int main()
 /********************************************************************************************************************************/
         while(mode==4){//顯示排行榜
 
-            al_get_mouse_state(MSstate);
-            if(al_mouse_button_down(MSstate,1)==1)
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
@@ -287,22 +292,22 @@ int main()
 
         while(mode==5){//操作說明
 
-            al_get_mouse_state(MSstate);
-            if(al_mouse_button_down(MSstate,1)==1)
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
