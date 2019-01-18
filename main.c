@@ -32,6 +32,15 @@ int main()
     ALLEGRO_EVENT_QUEUE* event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_EVENT *events = NULL;
+    /***/
+    ALLEGRO_BITMAP* windows = NULL;
+    ALLEGRO_BITMAP* B_start = NULL;
+    ALLEGRO_BITMAP* B_explain = NULL;
+    ALLEGRO_BITMAP* B_ranking = NULL;
+    ALLEGRO_BITMAP* B_back = NULL;
+    ALLEGRO_BITMAP* B_exit = NULL;
+    ALLEGRO_BITMAP* P_explain = NULL;
+    ALLEGRO_BITMAP* P_ranking = NULL;
 
     al_init();
     al_install_keyboard();
@@ -56,11 +65,24 @@ int main()
     al_start_timer(timer);
 
     int run=1; //等於0時關掉遊戲並結束程式
-    int mode=1; //遊戲畫面(1:遊戲選單 2:遊戲進行 3:輸入姓名 4:顯示排行榜
+    int mode=1; //遊戲畫面(1:遊戲選單 2:遊戲進行 3:輸入姓名 4:顯示排行榜5.操作說明
     int dog_amount=5;
     int shit_amount=5;
     int dog_killed=0;
     int i=0;
+    int x=0;
+    int y=0;
+    int xr=1000,yr=1000;
+    /********************************/
+    windows = al_load_bitmap("./Window2.png");
+    B_start = al_load_bitmap("./B_start.png");
+    B_ranking = al_load_bitmap("./B_ranking.png");
+    B_explain = al_load_bitmap("./B_explain.png");
+    B_exit = al_load_bitmap("./B_exit.png");
+    P_ranking = al_load_bitmap("./P_ranking.png");
+    B_back = al_load_bitmap("./B_back.png");
+    P_explain = al_load_bitmap("./P_explain.png");
+
 
     object duck;
     object DOG[dog_amount];
@@ -102,6 +124,77 @@ int main()
     while(run){
 
         while(mode==1){//遊戲選單
+
+        x=0;
+        y=0;
+        xr=1000,yr=1000;
+
+
+        al_draw_bitmap(windows, 0, 0, 0);
+        al_draw_bitmap(B_start, 430, 360, 0);
+        al_draw_bitmap( B_ranking, 430, 440, 0);
+        al_draw_bitmap(B_explain, 430, 520, 0);
+        al_draw_bitmap(B_exit, 430, 600, 0);
+
+        al_flip_display();
+        al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
+            {
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
+
+            }
+
+            while(1)
+            {
+                al_get_mouse_state(&MSstate);
+                al_rest(0.01);
+                if(al_mouse_button_down(&MSstate,1)==0)
+                {
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    break;
+                }
+
+            }
+            if(x>=430&&y>=360&&x<=650&&y<=420){//選項框:開始
+                mode=2;
+                break;
+            }
+            if(x>=430&&y>=440&&x<=650&&y<=500)//排行
+            {
+                mode=4;
+                printf("排行\n");
+                x=0;
+                y=0;
+                xr=1000,yr=1000;
+
+                al_draw_bitmap( P_ranking, 140, 70, 0);
+                al_draw_bitmap( B_back, 430, 610, 0);
+                al_flip_display();
+
+                break;
+            }//排行
+            if(x>=430&&y>=520&&x<=650&&y<=580)
+            {
+                mode=5;
+                printf("operate explaining\n");
+                x=0;
+                y=0;
+                xr=1000,yr=1000;
+                al_draw_bitmap( P_explain, 140, 70, 0);
+                al_draw_bitmap( B_back, 430, 610, 0);
+                al_flip_display();
+                break;
+            }//選項框:操作說明
+             if(x>=430&&y>=600&&x<=650&&y<=660)
+            {
+                run=0;
+                break;
+            }//退出
+
+
+
         }
 /********************************************************************************************************************************/
         while(mode==2){//遊戲進行
@@ -159,11 +252,75 @@ int main()
         }
 /********************************************************************************************************************************/
         while(mode==4){//顯示排行榜
+
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
+            {
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
+
+            }
+
+            while(1)
+            {
+                al_get_mouse_state(&MSstate);
+                al_rest(0.01);
+                if(al_mouse_button_down(&MSstate,1)==0)
+                {
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    break;
+                }
+
+            }
+            if(x>=430&&y>=610&&x<=650&&y<=670)
+            {
+                mode=1;
+                break;
         }
     }
+/**********************************************************************/
 
+        while(mode==5){//操作說明
+
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
+            {
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
+
+            }
+
+            while(1)
+            {
+                al_get_mouse_state(&MSstate);
+                al_rest(0.01);
+                if(al_mouse_button_down(&MSstate,1)==0)
+                {
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
+                    break;
+                }
+
+            }
+            if(x>=430&&y>=610&&x<=650&&y<=670)
+            {
+                mode=1;
+                break;
+        }
+    }
+   /***************************************/
     al_destroy_display(display);
     al_destroy_bitmap(duck.bmp);
+    al_destroy_bitmap(windows);
+    al_destroy_display(display);
+    al_destroy_bitmap(B_start);
+    al_destroy_bitmap(B_ranking);
+    al_destroy_bitmap(B_explain);
+    al_destroy_bitmap(B_exit);
+    al_destroy_bitmap(P_ranking);
+    al_destroy_bitmap(P_explain);
+
     for(i=0;i<=dog_amount-1;i++){
     al_destroy_bitmap(DOG[i].bmp);}
     for(i=0;i<=shit_amount-1;i++){
