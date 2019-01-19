@@ -30,12 +30,12 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="../../../../../allegro/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/include" />
+			<Add directory="D:/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/include" />
 		</Compiler>
 		<Linker>
-			<Add option="-static" />
-			<Add option="-static-libgcc" />
 			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-static" />
 			<Add library="liballegro_monolith-static.a" />
 			<Add library="libvorbisfile.a" />
 			<Add library="libvorbis.a" />
@@ -64,7 +64,7 @@
 			<Add library="libuuid.a" />
 			<Add library="libcomdlg32.a" />
 			<Add library="libadvapi32.a" />
-			<Add directory="../../../../../allegro/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/lib" />
+			<Add directory="D:/allegro-mingw-gcc5.3.0-x86-static-5.2.1.1/lib" />
 		</Linker>
 		<Unit filename="AttackJudgeBullet.c">
 			<Option compilerVar="CC" />
@@ -80,6 +80,12 @@
 		</Unit>
 		<Unit filename="function.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="reverseHorizontalDirection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="reverseVerticalDirection.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="struct.h" />

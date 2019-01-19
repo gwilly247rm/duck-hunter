@@ -12,5 +12,19 @@
 #include "function.h"
 #include "struct.h"
 
-void MoveDuck(ALLEGRO_EVENT *event, object *duck, int *width){
+#define PADDLE_MOVE 10
+
+void moveduck(ALLEGRO_EVENT *event,object*duck)
+{
+    //if (al_key_down(&KBstate, ALLEGRO_KEY_LEFT)){al_draw_bitmap( duck2, duck.x, 0, 0);/* draw the bitmap */};
+    //if (al_key_down(&KBstate, ALLEGRO_KEY_RIGHT)){al_draw_bitmap( duck1, duck.x, 0, 0);/* draw the bitmap */};
+    //else if (al_draw_bitmap( duck3, duck.x, 0, 0));
+
+    if ((*event).keyboard.keycode==ALLEGRO_KEY_A) (*duck).x -= PADDLE_MOVE;
+    if ((*event).keyboard.keycode==ALLEGRO_KEY_D) (*duck).x += PADDLE_MOVE;
+
+    /* make sure the paddles don go off screen */
+
+    if ((*duck).x < 0)        (*duck).x = 0;
+    if ((*duck).x > 980)       (*duck).x = 980;
 }

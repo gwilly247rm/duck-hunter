@@ -12,11 +12,15 @@
 #include <stdlib.h>
 #include "struct.h"
 
-void MoveDog(object *DOG, int *width, int *length);
+//void MoveDog(object *DOG, int *width, int *length);
 void MoveShit(object *SHIT, int *ground);
 void AttackJudgeBullet(ALLEGRO_EVENT *event, object *DOG, int *dog_killed);
 void AttackJudgeShit(object *duck, object *SHIT);
-void MoveDuck(ALLEGRO_EVENT *event, object *duck, int *width);
+//void MoveDuck(ALLEGRO_EVENT *event, object *duck, int *width);
 void DogAttack(object *DOG, object *SHIT);
+void moveDOG(ALLEGRO_EVENT *event,object*DOG);
+void reverseVerticalDirection(object*DOG);
+void reverseHorizontalDirection(object*DOG);
+void moveduck(ALLEGRO_EVENT *event,object*duck);
 
 #endif
