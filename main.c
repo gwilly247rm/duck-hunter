@@ -175,8 +175,6 @@ int main()
         y=0;
         xr=1000,yr=1000;
 
-
-
         al_draw_bitmap(windows, 0, 0, 0);
         al_draw_bitmap(B_start, 430, 360, 0);
         al_draw_bitmap( B_ranking, 430, 440, 0);
@@ -257,41 +255,40 @@ int main()
             {
                 AttackJudgeShit(&duck, SHIT);
                 moveDOG(DOG);
-            }
 
-            while (al_get_next_event(event_queue, &events))
-            {
-                switch (events.type)
+                while (al_get_next_event(event_queue, &events))
                 {
-                case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                    run = 0;
-                    break;
-
-                case ALLEGRO_EVENT_KEY_DOWN:
-                    if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                    switch (events.type)
                     {
+                    case ALLEGRO_EVENT_DISPLAY_CLOSE:
                         run = 0;
-                    }
-                    moveduck(events, &duck);
-                    break;
+                        break;
 
-                case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                    if(events.mouse.button==1)
-                    {
-                        AttackJudgeBullet(events, DOG, &DOG_killed);
+                    case ALLEGRO_EVENT_KEY_DOWN:
+                        if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                        {
+                            run = 0;
+                        }
+                        moveduck(events, &duck);
+                        break;
+
+                    case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+                        if(events.mouse.button==1)
+                        {
+                            AttackJudgeBullet(events,DOG, &DOG_killed);
+                        }
+                        break;
                     }
-                    break;
                     break;
                 }
             }
-printf("1");
+
             /*DOG and duck move*/
-            int j;
-                j=rand()%3+1;
+
                 for(i=0; i<5; i++)
                 {
-                    DOG[i].x = display_wid / j; /* give the DOG its initial x-coordinate */
-                    DOG[i].y = display_len / j; /* give the DOG its initial y-coordinate */
+                    DOG[i].x = display_wid / 2; /* give the DOG its initial x-coordinate */
+                    DOG[i].y = display_len / 2; /* give the DOG its initial y-coordinate */
                     DOG[i].direction = rand() % 4; /* and then make a random initial direction */
                 }
                 srand( time( NULL ) ); /* seed the random function */
@@ -306,8 +303,7 @@ printf("1");
                 int a_dd;
                 int b_dd;
 
-
-                moveduck(events,&duck); /* move the paddles */
+                moveduck(events,&duck); /* move the paddles */printf("1");
                 if (al_key_down(&KBstate, ALLEGRO_KEY_A))
                 {
                     al_draw_bitmap( duck2, duck.x, 600, 0);/* draw the bitmap */
@@ -318,8 +314,8 @@ printf("1");
                 }
                 else
                     al_draw_bitmap( duck3, duck.x, 600, 0);
+printf("1");
 
-                al_get_keyboard_state(&KBstate);
                 if (al_key_down(&KBstate, ALLEGRO_KEY_ESCAPE))
                     break;
 
