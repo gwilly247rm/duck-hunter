@@ -144,9 +144,9 @@ int main()
         al_draw_bitmap(B_exit, 430, 600, 0);
 
         al_flip_display();
-        printf("f");
+
         al_get_mouse_state(&MSstate);
-        printf("k");
+
             if(al_mouse_button_down(&MSstate,1))
             {
                 x=al_get_mouse_state_axis(&MSstate,0);
@@ -181,6 +181,7 @@ int main()
                 al_draw_bitmap( P_ranking, 140, 70, 0);
                 al_draw_bitmap( B_back, 430, 610, 0);
                 al_flip_display();
+
 
                 break;
             }//排行
@@ -288,6 +289,7 @@ int main()
                 break;
         }
     }
+
 /**********************************************************************/
 
         while(mode==5){//操作說明
@@ -318,6 +320,7 @@ int main()
                 break;
         }
     }
+    }
    /***************************************/
     al_destroy_display(display);
     al_destroy_bitmap(duck.bmp);
@@ -338,4 +341,4 @@ int main()
     al_destroy_timer(timer);
     al_destroy_event_queue(event_queue);
     return 0;
-}}
+}
