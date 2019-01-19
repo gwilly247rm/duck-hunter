@@ -134,7 +134,7 @@ int main()
     object DOG[DOG_amount];
     object SHIT[shit_amount];
 
-    duck.bmp=al_load_bitmap("duck.png");
+    duck.bmp=al_load_bitmap("duck1.png");
     duck.kind=1;
     duck.x=display_wid/2;
     duck.y=display_len-60-80;
@@ -144,7 +144,7 @@ int main()
     duck.hp=3;
 
     for(i=0;i<=DOG_amount-1;i++){
-        DOG[i].bmp=al_load_bitmap("DOG.png");
+        DOG[i].bmp=al_load_bitmap("dog1.png");
         DOG[i].kind=0;
         DOG[i].x=0;
         DOG[i].y=0;
@@ -189,7 +189,6 @@ int main()
             {
                 x=al_get_mouse_state_axis(&MSstate,0);
                 y=al_get_mouse_state_axis(&MSstate,1);
-
             }
 
             while(1)
@@ -303,7 +302,7 @@ int main()
                 int a_dd;
                 int b_dd;
 
-                moveduck(events,&duck); /* move the paddles */printf("1");
+                moveduck(events,&duck); /* move the paddles */
                 if (al_key_down(&KBstate, ALLEGRO_KEY_A))
                 {
                     al_draw_bitmap( duck2, duck.x, 600, 0);/* draw the bitmap */
@@ -314,7 +313,7 @@ int main()
                 }
                 else
                     al_draw_bitmap( duck3, duck.x, 600, 0);
-printf("1");
+
 
                 if (al_key_down(&KBstate, ALLEGRO_KEY_ESCAPE))
                     break;
@@ -385,7 +384,6 @@ printf("1");
                 }
 
                 al_rest(0.003);
-
 
             /*********************************/
             al_draw_bitmap(duck.bmp, duck.x, duck.y, 0);
