@@ -2,49 +2,49 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="function.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="701" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="AttackJudgeShit.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="218" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="reverseVerticalDirection.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="AttackJudgeBullet.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="404" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="9111" topLine="288" />
-		</Cursor>
-	</File>
-	<File name="struct.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="149" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="reverseHorizontalDirection.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="529" topLine="4" />
-		</Cursor>
-	</File>
-	<File name="MoveDog.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="444" topLine="18" />
+			<Cursor1 position="849" topLine="16" />
 		</Cursor>
 	</File>
 	<File name="MoveDuck.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="422" topLine="0" />
+			<Cursor1 position="593" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="MoveDog.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1744" topLine="37" />
+		</Cursor>
+	</File>
+	<File name="function.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="813" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="reverseVerticalDirection.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="913" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="AttackJudgeBullet.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="808" topLine="22" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9567" topLine="306" />
+		</Cursor>
+	</File>
+	<File name="struct.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="174" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

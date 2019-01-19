@@ -12,12 +12,16 @@
 #include "function.h"
 #include "struct.h"
 
-#define PADDLE_MOVE 10
+#define PADDLE_MOVE 30
 
-void moveduck(ALLEGRO_EVENT event,object*duck)
+void moveduck(ALLEGRO_EVENT event,object *duck)
 {
-    if (event.keyboard.keycode==ALLEGRO_KEY_A) (*duck).x -= PADDLE_MOVE;
+    if (event.keyboard.keycode==ALLEGRO_KEY_A) {
+
+            (*duck).x -= PADDLE_MOVE;}
     if (event.keyboard.keycode==ALLEGRO_KEY_D) (*duck).x += PADDLE_MOVE;
+
+
 
     /* make sure the paddles don go off screen */
 

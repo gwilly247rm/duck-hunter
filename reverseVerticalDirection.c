@@ -19,19 +19,14 @@
 
 void reverseVerticalDirection(object *DOG) /* reverse the DOG¡¦s up-down direction */
 {
-    int i;
-    for(i=0; i<=4; i++)
-    {
-        if(DOG[i].kind !=0)
-        {
-            if ( DOG[i].direction == DOWN_RIGHT )
-                DOG[i].direction = UP_RIGHT;
-            else if ( DOG[i].direction == DOWN_LEFT )
-                DOG[i].direction = UP_LEFT;
-            else if ( DOG[i].direction == UP_RIGHT )
-                DOG[i].direction = DOWN_RIGHT;
-            else if ( DOG[i].direction == UP_LEFT )
-                DOG[i].direction = DOWN_LEFT;
-        }
-    }
+            if ( (*DOG).direction == DOWN_RIGHT )
+                (*DOG).direction = UP_RIGHT;
+            else if ( (*DOG).direction == DOWN_LEFT )
+                (*DOG).direction = UP_LEFT;
+            else if ( (*DOG).direction == UP_RIGHT )
+                (*DOG).direction = DOWN_RIGHT;
+            else if ( (*DOG).direction == UP_LEFT )
+                (*DOG).direction = DOWN_LEFT;
+
+
 } /* end function reverseVerticalDirection */

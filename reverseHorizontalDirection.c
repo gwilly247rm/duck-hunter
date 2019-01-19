@@ -17,28 +17,26 @@
 #define DOWN_LEFT 2
 #define UP_LEFT 3
 
-void reverseHorizontalDirection(object*DOG) /* reverses the horizontal direction */
+void reverseHorizontalDirection(object *DOG) /* reverses the horizontal direction */
 {
-    int i;
-    for(i=0; i<=4; i++)
-    {
-        if(DOG[i].kind !=0)
-        {
-            switch ( DOG[i].direction )
+
+
+
+            switch ( (*DOG).direction )
             {
             case DOWN_RIGHT:
-                DOG[i].direction = DOWN_LEFT;
+                (*DOG).direction = DOWN_LEFT;
                 break;
             case UP_RIGHT:
-                DOG[i].direction = UP_LEFT;
+                (*DOG).direction = UP_LEFT;
                 break;
             case DOWN_LEFT:
-                DOG[i].direction = DOWN_RIGHT;
+                (*DOG).direction = DOWN_RIGHT;
                 break;
             case UP_LEFT:
-                DOG[i].direction = UP_RIGHT;
+                (*DOG).direction = UP_RIGHT;
                 break;
             }
-        }
-    } /* end switch */
+
+     /* end switch */
 } /* end function reverseHorizontalDirection */

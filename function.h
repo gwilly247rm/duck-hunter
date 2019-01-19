@@ -19,8 +19,8 @@ void AttackJudgeShit(object *duck, object *SHIT);
 //void MoveDuck(ALLEGRO_EVENT *event, object *duck, int *width);
 void DogAttack(object *DOG, object *SHIT);
 void moveDOG(object*DOG);
-void reverseVerticalDirection(object*DOG);
-void reverseHorizontalDirection(object*DOG);
+void reverseVerticalDirection(object *DOG);
+void reverseHorizontalDirection(object *DOG);
 void moveduck(ALLEGRO_EVENT event,object*duck);
 
 #endif

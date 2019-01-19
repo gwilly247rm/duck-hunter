@@ -6,6 +6,7 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_font.h>
 
+
 #include <windows.h>
 #include <time.h>
 #include <stdio.h>
@@ -30,9 +31,6 @@ int main()
     int DOG_wid=90;//狗寬
     int DOG_len=70;//長
 
-    int duck_wid=100;//狗寬
-    int duck_len=80;//長
-
     int shit_wid=40;//屎寬
     int shit_len=40;//長
 
@@ -41,7 +39,6 @@ int main()
     ALLEGRO_EVENT_QUEUE* event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
     ALLEGRO_EVENT events;
-    ALLEGRO_KEYBOARD_STATE KBstate;
 
     /***/
     ALLEGRO_BITMAP* windows = NULL;
@@ -82,7 +79,7 @@ int main()
 
 
 
-    timer = al_create_timer(0.01);
+    timer = al_create_timer(0.007);
     display = al_create_display(display_wid, display_len);
     srand( time( NULL ) );
     ALLEGRO_MOUSE_STATE MSstate;
@@ -131,8 +128,8 @@ int main()
     duck3 = al_load_bitmap( "duck3.png");
 
     object duck;
-    object DOG[DOG_amount];
-    object SHIT[shit_amount];
+    object DOG[5];
+    object SHIT[5];
 
     duck.bmp=al_load_bitmap("duck1.png");
     duck.kind=1;
@@ -145,7 +142,7 @@ int main()
 
     for(i=0;i<=DOG_amount-1;i++){
         DOG[i].bmp=al_load_bitmap("dog1.png");
-        DOG[i].kind=0;
+        DOG[i].kind=2;
         DOG[i].x=0;
         DOG[i].y=0;
         DOG[i].direction=0;
@@ -169,21 +166,21 @@ int main()
 
     while(run){
 
-        while(mode==1){//遊戲選單
+        while(mode==1 && run==1){//遊戲選單
 
-        x=0;
-        y=0;
-        xr=1000,yr=1000;
+            x=0;
+            y=0;
+            xr=1000,yr=1000;
 
-        al_draw_bitmap(windows, 0, 0, 0);
-        al_draw_bitmap(B_start, 430, 360, 0);
-        al_draw_bitmap( B_ranking, 430, 440, 0);
-        al_draw_bitmap(B_explain, 430, 520, 0);
-        al_draw_bitmap(B_exit, 430, 600, 0);
+            al_draw_bitmap(windows, 0, 0, 0);
+            al_draw_bitmap(B_start, 430, 360, 0);
+            al_draw_bitmap( B_ranking, 430, 440, 0);
+            al_draw_bitmap(B_explain, 430, 520, 0);
+            al_draw_bitmap(B_exit, 430, 600, 0);
 
-        al_flip_display();
+            al_flip_display();
 
-        al_get_mouse_state(&MSstate);
+            al_get_mouse_state(&MSstate);
             if(al_mouse_button_down(&MSstate,1))
 
             {
@@ -244,159 +241,163 @@ int main()
         }
 
 /********************************************************************************************************************************/
-        while(mode==2){//遊戲進行
+        while(mode==2 && run==1){//遊戲進行
 
-            if(game_start==1){//遊戲開始，初始HP
+
+
+
+
+
+
+            if(game_start==1){//遊戲開始，初始各項數值
                 duck.hp=3;
+                background = al_load_bitmap("fon.jpg");
                 game_start=0;
-
-            if (!al_is_event_queue_empty(event_queue))
-            {
-                AttackJudgeShit(&duck, SHIT);
-                moveDOG(DOG);
-
-                while (al_get_next_event(event_queue, &events))
+                x=1;
+                y=1;
+                for(i=0; i<5; i++)
                 {
-                    switch (events.type)
-                    {
-                    case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                        run = 0;
-                        break;
+                    DOG[i].x = display_wid / 2; // give the DOG its initial x-coordinate
+                    DOG[i].y = display_len / 2; // give the DOG its initial y-coordinate
+                    DOG[i].direction = rand() % 4; // and then make a random initial direction
+                }
+            }
 
-                    case ALLEGRO_EVENT_KEY_DOWN:
-                        if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            al_draw_bitmap(background, 0, 0, 0);//印背景
+
+            if (!al_is_event_queue_empty(event_queue))//如果有event
+            {
+                //AttackJudgeShit(&duck, SHIT);
+
+
+                while (al_get_next_event(event_queue, &events))//取出event
+                {
+                    switch (events.type)//判斷event類型
+                    {
+
+                    case ALLEGRO_EVENT_KEY_DOWN://鍵盤被按下
+                        if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)//esc被按下
                         {
                             run = 0;
+                            break;
                         }
-                        moveduck(events, &duck);
-                        break;
-
-                    case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                        if(events.mouse.button==1)
+                        moveduck(events,&duck);//更新鴨子座標
+                        if (events.keyboard.keycode == ALLEGRO_KEY_A)//根據鴨子行進方向更改鴨子圖片
                         {
-                            AttackJudgeBullet(events,DOG, &DOG_killed);
+
+                            duck.bmp=duck2;
+
+                        }
+                        else if (events.keyboard.keycode == ALLEGRO_KEY_D)//根據鴨子行進方向更改鴨子圖片
+                        {
+
+                            duck.bmp=duck1;
+
+                        }
+                        else{
+
+                            duck.bmp=duck3;
+
+                            }
+                        break;
+
+                    case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN://滑鼠被按下
+
+                        if(events.mouse.button==1)//左鍵被按
+                        {
+                            //AttackJudgeBullet(events,DOG, &DOG_killed);//攻擊判定
                         }
                         break;
-                    }
-                    break;
-                }
-            }
 
-            /*DOG and duck move*/
+                    case ALLEGRO_EVENT_TIMER://計時器計時
 
-                for(i=0; i<5; i++)
-                {
-                    DOG[i].x = display_wid / 2; /* give the DOG its initial x-coordinate */
-                    DOG[i].y = display_len / 2; /* give the DOG its initial y-coordinate */
-                    DOG[i].direction = rand() % 4; /* and then make a random initial direction */
-                }
-                srand( time( NULL ) ); /* seed the random function */
+                            moveDOG(DOG);//更新狗的座標
 
-                background = al_load_bitmap("fon.png");
-
-                al_draw_bitmap(background, 0, 0, 0);
-
-                int x_dd=1;
-                int y_dd=1;
-
-                int a_dd;
-                int b_dd;
-
-                moveduck(events,&duck); /* move the paddles */
-                if (al_key_down(&KBstate, ALLEGRO_KEY_A))
-                {
-                    al_draw_bitmap( duck2, duck.x, 600, 0);/* draw the bitmap */
-                }
-                else if (al_key_down(&KBstate, ALLEGRO_KEY_D))
-                {
-                    al_draw_bitmap( duck1, duck.x, 600, 0);/* draw the bitmap */
-                }
-                else
-                    al_draw_bitmap( duck3, duck.x, 600, 0);
+                            int a_dd;
+                            int b_dd;
 
 
-                if (al_key_down(&KBstate, ALLEGRO_KEY_ESCAPE))
-                    break;
+                            for(i=0; i<5; i++)//狗的動畫
+                            {
+                                if(DOG[i].direction==0||DOG[i].direction==1)
+                                {
+                                    if(x>0&&x<=50)
+                                        DOG[i].bmp=DOG1;
 
-                for(i=0; i<5; i++)
-                {
-                    moveDOG(DOG);
-                } /* move the DOG */
+                                    else if(x>50&&x<=100)
+                                        DOG[i].bmp=DOG2;
 
-                for(i=0; i<5; i++)
-                {
-                    if(DOG[i].direction==0||DOG[i].direction==1)
-                    {
-                        if(x>0&&x<=50)
-                            al_draw_bitmap( DOG1, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(x>50&&x<=100)
-                            al_draw_bitmap( DOG2, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(x>100&&x<=150)
-                            al_draw_bitmap( DOG3, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(x>150&&x<=200)
-                            al_draw_bitmap( DOG4, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(x>200&&x<=250)
-                            al_draw_bitmap( DOG5, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
+                                    else if(x>100&&x<=150)
+                                        DOG[i].bmp=DOG3;
 
-                        x=x+1;
-                        if(x==251)
-                            x=1;
-                    }
-                }
+                                    else if(x>150&&x<=200)
+                                        DOG[i].bmp=DOG4;
 
-                for(i=0; i<5; i++)
-                {
-                    if(DOG[i].direction==2||DOG[i].direction==3)
-                    {
-                        if(y>0&&y<=50)
-                            al_draw_bitmap( DOG11, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(y>50&&y<=100)
-                            al_draw_bitmap( DOG12, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(y>100&&y<=150)
-                            al_draw_bitmap( DOG13, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(y>150&&y<=200)
-                            al_draw_bitmap( DOG14, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
-                        else if(y>200&&y<=250)
-                        al_draw_bitmap( DOG15, DOG[i].x, DOG[i].y, 0);/* draw the bitmap */
+                                    else if(x>200&&x<=250)
+                                        DOG[i].bmp=DOG5;
 
-                        y=y+1;
-                        if(y==251)
-                            y=1;
-                    }
-                }
 
-                a_dd = rand() % 1200+1;
+                                    x=x+1;
 
-                for(i=0; i<5; i++)
-                {
-                    if(a_dd<20 && b_dd%8==0)
-                    {
-                        if ( DOG[i].direction == DOWN_RIGHT )
-                            DOG[i].direction = UP_LEFT;
-                        else if ( DOG[i].direction == DOWN_LEFT )
-                            DOG[i].direction = UP_RIGHT;
-                        else if ( DOG[i].direction == UP_RIGHT )
-                            DOG[i].direction = DOWN_LEFT;
-                        else if ( DOG[i].direction == UP_LEFT )
-                            DOG[i].direction = DOWN_RIGHT;
-                    }
-                    b_dd=b_dd+1;
-                }
+                                    if(x==251)
+                                        x=1;
+                                }
+                            }
 
-                al_rest(0.003);
+                            for(i=0; i<5; i++)//狗的動畫
+                            {
+                                if(DOG[i].direction==2||DOG[i].direction==3)
+                                {
+                                    if(y>0&&y<=50)
+                                        DOG[i].bmp=DOG11;
+                                    else if(y>50&&y<=100)
+                                        DOG[i].bmp=DOG12;
+                                    else if(y>100&&y<=150)
+                                        DOG[i].bmp=DOG13;
+                                    else if(y>150&&y<=200)
+                                        DOG[i].bmp=DOG14;
+                                    else if(y>200&&y<=250)
+                                        DOG[i].bmp=DOG15;
+
+                                    y=y+1;
+                                    if(y==251)
+                                        y=1;
+                                }
+                            }
+
+                            a_dd = rand() % 1200+1;//用亂數控制狗是否要換方向
+
+                            for(i=0; i<5; i++)
+                            {
+                                if(a_dd<20 && b_dd%8==0)
+                                {
+
+                                    DOG[i].direction = rand()%4;
+
+                                }
+                                b_dd=b_dd+1;
+                            }
+                            break;
+
+                                }
+                                break;
+                            }
+                        }
 
             /*********************************/
-            al_draw_bitmap(duck.bmp, duck.x, duck.y, 0);
-            for(i=0;i<=DOG_amount-1;i++){
-                if(DOG[i].kind!=0){
+
+            for(i=0;i<=DOG_amount-1;i++){//印出狗
+
+                    if(DOG[i].kind!=0)
                     al_draw_bitmap(DOG[i].bmp, DOG[i].x, DOG[i].y, 0);
-                }
-            }
-            for(i=0;i<=shit_amount-1;i++){
+
+            }/*
+            for(i=0;i<=shit_amount-1;i++){//印出屎
                 if(SHIT[i].kind!=0){
                     al_draw_bitmap(SHIT[i].bmp, SHIT[i].x, SHIT[i].y, 0);
                 }
-            }
+            }*/
+            al_draw_bitmap( duck.bmp, duck.x, 600, 0);//印出鴨子
             al_flip_display();
 
             if(duck.hp<=0){
@@ -404,12 +405,12 @@ int main()
                 break;
             }
         }
+
+/********************************************************************************************************************************/
+        while(mode==3 && run==1){//輸入姓名
         }
 /********************************************************************************************************************************/
-        while(mode==3){//輸入姓名
-        }
-/********************************************************************************************************************************/
-        while(mode==4){//顯示排行榜
+        while(mode==4 && run==1){//顯示排行榜
 
             al_get_mouse_state(&MSstate);
             if(al_mouse_button_down(&MSstate,1)==1)
@@ -440,7 +441,7 @@ int main()
 
 /**********************************************************************/
 
-        while(mode==5){//操作說明
+        while(mode==5 && run==1){//操作說明
 
             al_get_mouse_state(&MSstate);
             if(al_mouse_button_down(&MSstate,1)==1)
@@ -470,6 +471,7 @@ int main()
     }
     }
 
+
    /***************************************/
     al_destroy_display(display);
     al_destroy_bitmap(duck.bmp);
@@ -495,6 +497,7 @@ int main()
     al_destroy_bitmap(duck1);
     al_destroy_bitmap(duck2);
     al_destroy_bitmap(duck3);
+    al_destroy_bitmap(background);
 
     for(i=0;i<=DOG_amount-1;i++){
     al_destroy_bitmap(DOG[i].bmp);}
