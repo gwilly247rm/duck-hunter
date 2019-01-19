@@ -10,7 +10,7 @@
 #include "function.h"
 #include "struct.h"
 
-void AttackJudgeBullet(ALLEGRO_EVENT *events,object*dog,int *dog_killed)
+void AttackJudgeBullet(ALLEGRO_EVENT events,object*dog,int *dog_killed)
 {
     //int count_dog_relife=0;
     int x=0,y=0,i=0;
@@ -21,8 +21,8 @@ void AttackJudgeBullet(ALLEGRO_EVENT *events,object*dog,int *dog_killed)
     while(*dog_killed<=10)
     {
 
-            x=(*events).mouse.x;
-            y=(*events).mouse.y;
+            x=events.mouse.x;
+            y=events.mouse.y;
 
 
         for(i=0; i<5; i++)

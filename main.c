@@ -40,7 +40,7 @@ int main()
     ALLEGRO_FONT *font = NULL;
     ALLEGRO_EVENT_QUEUE* event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
-    ALLEGRO_EVENT *events = NULL;
+    ALLEGRO_EVENT events;
     ALLEGRO_KEYBOARD_STATE KBstate;
 
     /***/
@@ -52,6 +52,8 @@ int main()
     ALLEGRO_BITMAP* B_exit = NULL;
     ALLEGRO_BITMAP* P_explain = NULL;
     ALLEGRO_BITMAP* P_ranking = NULL;
+
+    ALLEGRO_BITMAP* background = NULL;
 
     /*DOG and duck*/
     ALLEGRO_BITMAP *DOG1 = NULL; /* pointer to the DOG's image bitmap */
@@ -250,33 +252,41 @@ int main()
             if(game_start==1){//遊戲開始，初始HP
                 duck.hp=3;
                 game_start=0;
+
+            if (!al_is_event_queue_empty(event_queue))
+            {
+                AttackJudgeShit(&duck, SHIT);
+                moveDOG(DOG);
             }
 
-            if (!al_is_event_queue_empty(event_queue)) {
-                AttackJudgeShit(&duck, SHIT);
-                moveDOG(events,DOG);
+            while (al_get_next_event(event_queue, &events))
+            {
+                switch (events.type)
+                {
+                case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                    run = 0;
+                    break;
 
-                while (al_get_next_event(event_queue, events)) {
-                    switch ((*events).type) {
-                    case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                case ALLEGRO_EVENT_KEY_DOWN:
+                    if(events.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                    {
                         run = 0;
-                        break;
+                    }
+                    moveduck(events, &duck);
+                    break;
 
-                    case ALLEGRO_EVENT_KEY_DOWN:
-                        if((*events).keyboard.keycode == ALLEGRO_KEY_ESCAPE){run = 0;}
-                        moveduck(events, &duck);
-                        break;
-
-                    case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                        if((*events).mouse.button==1){
-                            AttackJudgeBullet(events, DOG, &DOG_killed);
-                        }
-                        break;
+                case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+                    if(events.mouse.button==1)
+                    {
+                        AttackJudgeBullet(events, DOG, &DOG_killed);
+                    }
+                    break;
                     break;
                 }
             }
-                /*DOG and duck move*/
-                int j;
+printf("1");
+            /*DOG and duck move*/
+            int j;
                 j=rand()%3+1;
                 for(i=0; i<5; i++)
                 {
@@ -285,6 +295,11 @@ int main()
                     DOG[i].direction = rand() % 4; /* and then make a random initial direction */
                 }
                 srand( time( NULL ) ); /* seed the random function */
+
+                background = al_load_bitmap("fon.png");
+
+                al_draw_bitmap(background, 0, 0, 0);
+
                 int x_dd=1;
                 int y_dd=1;
 
@@ -310,7 +325,7 @@ int main()
 
                 for(i=0; i<5; i++)
                 {
-                    moveDOG(events,DOG);
+                    moveDOG(DOG);
                 } /* move the DOG */
 
                 for(i=0; i<5; i++)

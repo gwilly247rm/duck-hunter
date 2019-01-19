@@ -17,7 +17,7 @@
 #define DOWN_LEFT 2
 #define UP_LEFT 3
 
-void moveDOG(ALLEGRO_EVENT *event,object*DOG) /* moves the DOG */
+void moveDOG(object*DOG) /* moves the DOG */
 {
     int i;
 
