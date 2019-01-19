@@ -20,19 +20,25 @@
 void reverseHorizontalDirection(object*DOG) /* reverses the horizontal direction */
 {
     int i;
-    switch ( DOG[i].direction )
+    for(i=0; i<=4; i++)
     {
-    case DOWN_RIGHT:
-        DOG[i].direction = DOWN_LEFT;
-        break;
-    case UP_RIGHT:
-        DOG[i].direction = UP_LEFT;
-        break;
-    case DOWN_LEFT:
-        DOG[i].direction = DOWN_RIGHT;
-        break;
-    case UP_LEFT:
-        DOG[i].direction = UP_RIGHT;
-        break;
+        if(DOG[i].kind !=0)
+        {
+            switch ( DOG[i].direction )
+            {
+            case DOWN_RIGHT:
+                DOG[i].direction = DOWN_LEFT;
+                break;
+            case UP_RIGHT:
+                DOG[i].direction = UP_LEFT;
+                break;
+            case DOWN_LEFT:
+                DOG[i].direction = DOWN_RIGHT;
+                break;
+            case UP_LEFT:
+                DOG[i].direction = UP_RIGHT;
+                break;
+            }
+        }
     } /* end switch */
 } /* end function reverseHorizontalDirection */

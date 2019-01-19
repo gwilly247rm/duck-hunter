@@ -78,7 +78,7 @@ int main()
     al_init_font_addon();
     al_init_ttf_addon();
 
-    ALLEGRO_MOUSE_STATE *MSstate=NULL;
+    ALLEGRO_MOUSE_STATE MSstate;
 
     timer = al_create_timer(0.01);
     display = al_create_display(display_wid, display_len);
@@ -181,29 +181,24 @@ int main()
         al_draw_bitmap(B_exit, 430, 600, 0);
 
         al_flip_display();
-<<<<<<< Updated upstream
 
         al_get_mouse_state(&MSstate);
-
             if(al_mouse_button_down(&MSstate,1))
-=======
-        al_get_mouse_state(MSstate);printf("k");
-            if(al_mouse_button_down(MSstate,1))
->>>>>>> Stashed changes
+
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
 
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
@@ -405,22 +400,22 @@ int main()
 /********************************************************************************************************************************/
         while(mode==4){//顯示排行榜
 
-            al_get_mouse_state(MSstate);
-            if(al_mouse_button_down(MSstate,1)==1)
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
@@ -436,22 +431,22 @@ int main()
 
         while(mode==5){//操作說明
 
-            al_get_mouse_state(MSstate);
-            if(al_mouse_button_down(MSstate,1)==1)
+            al_get_mouse_state(&MSstate);
+            if(al_mouse_button_down(&MSstate,1)==1)
             {
-                x=al_get_mouse_state_axis(MSstate,0);
-                y=al_get_mouse_state_axis(MSstate,1);
+                x=al_get_mouse_state_axis(&MSstate,0);
+                y=al_get_mouse_state_axis(&MSstate,1);
 
             }
 
             while(1)
             {
-                al_get_mouse_state(MSstate);
+                al_get_mouse_state(&MSstate);
                 al_rest(0.01);
-                if(al_mouse_button_down(MSstate,1)==0)
+                if(al_mouse_button_down(&MSstate,1)==0)
                 {
-                    xr=al_get_mouse_state_axis(MSstate,0);
-                    yr=al_get_mouse_state_axis(MSstate,1);
+                    xr=al_get_mouse_state_axis(&MSstate,0);
+                    yr=al_get_mouse_state_axis(&MSstate,1);
                     break;
                 }
 
@@ -462,12 +457,11 @@ int main()
                 break;
         }
     }
-    }
+
    /***************************************/
     al_destroy_display(display);
     al_destroy_bitmap(duck.bmp);
     al_destroy_bitmap(windows);
-    al_destroy_display(display);
     al_destroy_bitmap(B_start);
     al_destroy_bitmap(B_ranking);
     al_destroy_bitmap(B_explain);

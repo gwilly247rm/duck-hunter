@@ -20,26 +20,32 @@
 void moveDOG(ALLEGRO_EVENT *event,object*DOG) /* moves the DOG */
 {
     int i;
-    switch ( DOG[i].direction )
-    {
-    case DOWN_RIGHT:
-        DOG[i].x=DOG[i].x+1; /* move the DOG to the right */
-        ++DOG[i].y; /* move the DOG down */
-        break;
-    case UP_RIGHT:
-        ++DOG[i].x; /* move the DOG to the right */
-        --DOG[i].y; /* move the DOG up */
-        break;
-    case DOWN_LEFT:
-        --DOG[i].x; /* move the DOG to the left */
-        ++DOG[i].y; /* move the DOG down */
-        break;
-    case UP_LEFT:
-        --DOG[i].x; /* move the DOG to the left */
-        --DOG[i].y; /* move the DOG up */
-        break;
-    } /* end switch */
 
+    for(i=0; i<=4; i++)
+    {
+        if(DOG[i].kind !=0)
+        {
+            switch ( DOG[i].direction )
+            {
+            case DOWN_RIGHT:
+                DOG[i].x=DOG[i].x+1; /* move the DOG to the right */
+                ++DOG[i].y; /* move the DOG down */
+                break;
+            case UP_RIGHT:
+                ++DOG[i].x; /* move the DOG to the right */
+                --DOG[i].y; /* move the DOG up */
+                break;
+            case DOWN_LEFT:
+                --DOG[i].x; /* move the DOG to the left */
+                ++DOG[i].y; /* move the DOG down */
+                break;
+            case UP_LEFT:
+                --DOG[i].x; /* move the DOG to the left */
+                --DOG[i].y; /* move the DOG up */
+                break;
+            } /* end switch */
+        }
+    }
     /* make sure the DOG doesn¡¦t go off the screen */
 
     /* if the DOG is going off the top or bottom... */
