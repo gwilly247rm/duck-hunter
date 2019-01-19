@@ -78,11 +78,12 @@ int main()
     al_init_font_addon();
     al_init_ttf_addon();
 
-    ALLEGRO_MOUSE_STATE MSstate;
+
 
     timer = al_create_timer(0.01);
     display = al_create_display(display_wid, display_len);
     srand( time( NULL ) );
+    ALLEGRO_MOUSE_STATE MSstate;
 
     event_queue = al_create_event_queue();
     al_register_event_source(event_queue, al_get_keyboard_event_source());    /* register keyboard to event queue */
@@ -220,6 +221,7 @@ int main()
                 al_flip_display();
 
 
+
                 break;
             }//排行
             if(x>=430&&y>=520&&x<=650&&y<=580)
@@ -241,7 +243,7 @@ int main()
             }//退出
 
         }
-    }
+
 /********************************************************************************************************************************/
         while(mode==2){//遊戲進行
 
@@ -456,6 +458,7 @@ int main()
                 mode=1;
                 break;
         }
+    }
     }
 
    /***************************************/
